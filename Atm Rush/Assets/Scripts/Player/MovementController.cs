@@ -6,11 +6,11 @@ using DG.Tweening;
 
 public class MovementController : Singleton<MovementController>
 {
-    public float _limitX = 2;
-    public float _xSpeed = 25;
-    public float _forwardSpeed = 2;
-    public float _waveSpeed = .1f;
-    public float _waveScale = .1f;
+    [SerializeField] private float _limitX = 2;
+    [SerializeField] private float _xSpeed = 25;
+    [SerializeField] private float _forwardSpeed = 2;
+    [SerializeField] private float _waveSpeed = .1f;
+    [SerializeField] private float _waveScale = .1f;
 
     // Update is called once per frame
     void Update()
@@ -37,11 +37,11 @@ public class MovementController : Singleton<MovementController>
             
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartCoroutine(WaveMoney());
-        }
+        
     }
+
+
+    #region Money Wave
 
     public void StartWaveMoney()
     {
@@ -56,6 +56,7 @@ public class MovementController : Singleton<MovementController>
             yield return new WaitForSeconds(_waveSpeed);
             transform.GetChild(i).localScale -= new Vector3(_waveScale, _waveScale, _waveScale);
         }
-        
+
     }
+    #endregion
 }

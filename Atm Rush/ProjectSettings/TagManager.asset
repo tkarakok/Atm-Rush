@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Money
+  - Atm
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Money
   - Water
   - UI
   - 
