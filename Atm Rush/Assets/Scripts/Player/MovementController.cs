@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class MovementController : MonoBehaviour
+
+
+public class MovementController : Singleton<MovementController>
 {
     public float _limitX = 2;
     public float _xSpeed = 25;
     public float _forwardSpeed = 2;
+    public float _waveSpeed = .1f;
+    public float _waveScale = .1f;
 
     // Update is called once per frame
     void Update()
@@ -30,7 +34,28 @@ public class MovementController : MonoBehaviour
         {
             Transform child = transform.GetChild(i);
             child.DOMoveX(transform.position.x, (i * .2f));
+            
         }
 
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StartCoroutine(WaveMoney());
+        }
+    }
+
+    public void StartWaveMoney()
+    {
+        StartCoroutine(WaveMoney());
+    }
+
+    IEnumerator WaveMoney()
+    {
+        for (int i = 1; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).localScale += new Vector3(_waveScale, _waveScale, _waveScale);
+            yield return new WaitForSeconds(_waveSpeed);
+            transform.GetChild(i).localScale -= new Vector3(_waveScale, _waveScale, _waveScale);
+        }
+        
     }
 }

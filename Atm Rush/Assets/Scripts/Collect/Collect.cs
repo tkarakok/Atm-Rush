@@ -10,11 +10,13 @@ public class Collect : MonoBehaviour
     {
         if (other.CompareTag("Money"))
         {
+            MovementController.Instance.StartWaveMoney();
             other.tag = "Untagged";
             other.transform.SetParent(parent);
             other.gameObject.transform.position = transform.position + new Vector3(.3f,0,.3f);
-            Destroy(transform.GetComponent<Collect>());
             other.gameObject.AddComponent<Collect>().parent = parent;
+            
+            Destroy(transform.GetComponent<Collect>());
         }
     }
 
