@@ -16,7 +16,7 @@ public class MovementController : Singleton<MovementController>
     // Update is called once per frame
     void Update()
     {
-        if (!animator.GetBool("Win"))
+        if (StateManager.Instance.state == State.InGame)
         {
             float _touchXDelta = 0;
             float _newX = 0;

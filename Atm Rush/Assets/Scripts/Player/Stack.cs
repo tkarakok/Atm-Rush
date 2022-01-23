@@ -21,6 +21,13 @@ public class Stack : Singleton<Stack>
             instance.transform.SetParent(transform);
             yield return new WaitForSeconds(.1f);
         }
+        EventManager.Instance.EndGame();
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Multiplier"))
+        {
+            GameManager.Instance.Multiplier = other.GetComponent<Multiplier>().multiplier;
+        }
+    }
 }
