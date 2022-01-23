@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         TotalMoney = PlayerPrefs.GetInt("Money");
-        MoneyCounter = 34;
+        MoneyCounter = 0;
         MoneyInAtm = 0;
         UpdateMoneyCounterText();
     }

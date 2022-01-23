@@ -6,37 +6,40 @@ using DG.Tweening;
 
 public class MovementController : Singleton<MovementController>
 {
+    public Animator animator;
     [SerializeField] private float _limitX = 2;
     [SerializeField] private float _xSpeed = 25;
     [SerializeField] private float _forwardSpeed = 2;
     [SerializeField] private float _waveSpeed = .1f;
     [SerializeField] private float _waveScale = .1f;
-
+    
     // Update is called once per frame
     void Update()
     {
-
-        float _touchXDelta = 0;
-        float _newX = 0;
-        if (Input.GetMouseButton(0))
+        if (!animator.GetBool("Win"))
         {
-            _touchXDelta = Input.GetAxis("Mouse X");
+            float _touchXDelta = 0;
+            float _newX = 0;
+            if (Input.GetMouseButton(0))
+            {
+                _touchXDelta = Input.GetAxis("Mouse X");
+            }
+            _newX = transform.position.x + _xSpeed * _touchXDelta * Time.deltaTime;
+            _newX = Mathf.Clamp(_newX, -_limitX, _limitX);
+
+
+
+            Vector3 newPosition = new Vector3(_newX, transform.position.y, transform.position.z + _forwardSpeed * Time.deltaTime);
+            transform.position = newPosition;
+
+
+            for (int i = 1; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                child.DOMoveX(transform.position.x, (i * .2f));
+
+            }
         }
-        _newX = transform.position.x + _xSpeed * _touchXDelta * Time.deltaTime;
-        _newX = Mathf.Clamp(_newX, -_limitX, _limitX);
-
-
-
-        Vector3 newPosition = new Vector3(_newX, transform.position.y, transform.position.z + _forwardSpeed * Time.deltaTime);
-        transform.position = newPosition;
-
-        for (int i = 1; i < transform.childCount; i++)
-        {
-            Transform child = transform.GetChild(i);
-            child.DOMoveX(transform.position.x, (i * .2f));
-            
-        }
-
         
     }
 

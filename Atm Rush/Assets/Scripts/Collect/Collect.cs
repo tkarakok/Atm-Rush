@@ -18,8 +18,7 @@ public class Collect : MonoBehaviour
             MovementController.Instance.StartWaveMoney();
             Destroy(transform.GetComponent<Collect>());
         }
-        
     }
 
-    
+   
 }
